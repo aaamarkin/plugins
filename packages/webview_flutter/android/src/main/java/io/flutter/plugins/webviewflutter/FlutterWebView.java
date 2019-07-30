@@ -41,6 +41,9 @@ public class FlutterWebView implements PlatformView, MethodCallHandler {
     // Allow local storage.
     webView.getSettings().setDomStorageEnabled(true);
 
+    // Allow CORS
+    webView.getSettings().setAllowUniversalAccessFromFileURLs(true);
+
     methodChannel = new MethodChannel(messenger, "plugins.flutter.io/webview_" + id);
     methodChannel.setMethodCallHandler(this);
 
