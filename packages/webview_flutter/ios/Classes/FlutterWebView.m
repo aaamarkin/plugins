@@ -74,6 +74,7 @@
     _navigationDelegate = [[FLTWKNavigationDelegate alloc] initWithChannel:_channel];
     _webView.navigationDelegate = _navigationDelegate;
     [_webView.configuration.preferences setValue:@YES forKey:@"allowFileAccessFromFileURLs"];
+    [_webView.configuration setValue:@YES forKey:@"allowUniversalAccessFromFileURLs"];
     __weak __typeof__(self) weakSelf = self;
     [_channel setMethodCallHandler:^(FlutterMethodCall* call, FlutterResult result) {
       [weakSelf onMethodCall:call result:result];
