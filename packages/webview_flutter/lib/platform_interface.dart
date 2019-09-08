@@ -135,6 +135,11 @@ abstract class WebViewPlatformController {
         "WebView evaluateJavascript is not implemented on the current platform");
   }
 
+  Future<void> sendKeyEvent(bool up) {
+    throw UnimplementedError(
+        "WebView sendKeyEvent is not implemented on the current platform");
+  }
+
   /// Adds new JavaScript channels to the set of enabled channels.
   ///
   /// For each value in this list the platform's webview should make sure that a corresponding

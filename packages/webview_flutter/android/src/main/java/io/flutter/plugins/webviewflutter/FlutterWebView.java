@@ -8,6 +8,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.os.Handler;
+import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebStorage;
 import android.webkit.WebViewClient;
@@ -122,6 +123,9 @@ public class FlutterWebView implements PlatformView, MethodCallHandler {
       case "evaluateJavascript":
         evaluateJavaScript(methodCall, result);
         break;
+      case "sendKeyEvent":
+        sendKeyEvent(methodCall, result);
+        break;
       case "addJavascriptChannels":
         addJavaScriptChannels(methodCall, result);
         break;
@@ -197,6 +201,7 @@ public class FlutterWebView implements PlatformView, MethodCallHandler {
     if (jsString == null) {
       throw new UnsupportedOperationException("JavaScript string cannot be null");
     }
+    System.out.println("evaluateJavaScript");
     webView.evaluateJavascript(
         jsString,
         new android.webkit.ValueCallback<String>() {
@@ -205,6 +210,15 @@ public class FlutterWebView implements PlatformView, MethodCallHandler {
             result.success(value);
           }
         });
+  }
+
+  @SuppressWarnings("unchecked")
+  private void sendKeyEvent(MethodCall methodCall, Result result) {
+    Boolean isUp = (Boolean) methodCall.arguments;
+    int action = isUp ?  KeyEvent.ACTION_UP : KeyEvent.ACTION_DOWN;
+    System.out.println("sendKeyEvent");
+    webView.dispatchKeyEvent(new KeyEvent(action, KeyEvent.KEYCODE_P));
+    result.success(null);
   }
 
   @SuppressWarnings("unchecked")

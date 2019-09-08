@@ -100,6 +100,12 @@ class MethodChannelWebViewPlatform implements WebViewPlatformController {
   }
 
   @override
+  Future<void> sendKeyEvent(bool up) {
+    return _channel.invokeMethod<void>(
+        'sendKeyEvent', up);
+  }
+
+  @override
   Future<void> addJavascriptChannels(Set<String> javascriptChannelNames) {
     return _channel.invokeMethod<void>(
         'addJavascriptChannels', javascriptChannelNames.toList());

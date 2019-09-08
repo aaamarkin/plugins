@@ -583,6 +583,10 @@ class WebViewController {
     // ignore: strong_mode_implicit_dynamic_method
     return _webViewPlatformController.evaluateJavascript(javascriptString);
   }
+
+  Future<void> sendKeyEvent(bool up) {
+    return _webViewPlatformController.sendKeyEvent(up);
+  }
 }
 
 /// Manages cookies pertaining to all [WebView]s.
