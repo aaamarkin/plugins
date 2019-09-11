@@ -38,6 +38,10 @@ public class FlutterWebView implements PlatformView, MethodCallHandler {
       final View containerView) {
     webView = new InputAwareWebView(context, containerView);
 
+    webView.setInitialScale(1);
+    webView.getSettings().setUseWideViewPort(true);
+    webView.getSettings().setLoadWithOverviewMode(true);
+
     platformThreadHandler = new Handler(context.getMainLooper());
     // Allow local storage.
     webView.getSettings().setDomStorageEnabled(true);
