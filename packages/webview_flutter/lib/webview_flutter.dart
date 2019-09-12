@@ -256,10 +256,10 @@ class WebView extends StatefulWidget {
   final bool debuggingEnabled;
 
   @override
-  State<StatefulWidget> createState() => _WebViewState();
+  State<StatefulWidget> createState() => WebViewState();
 }
 
-class _WebViewState extends State<WebView> {
+class WebViewState extends State<WebView> {
   final Completer<WebViewController> _controller =
       Completer<WebViewController>();
 
