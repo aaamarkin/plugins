@@ -7,6 +7,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
   group('$SharedPreferences', () {
     const MethodChannel channel = MethodChannel(
       'plugins.flutter.io/shared_preferences',
@@ -155,6 +157,12 @@ void main() {
       expect(preferences.getString('String'), kTestValues2['flutter.String']);
     });
 
+    test('back to back calls should return same instance.', () async {
+      final Future<SharedPreferences> first = SharedPreferences.getInstance();
+      final Future<SharedPreferences> second = SharedPreferences.getInstance();
+      expect(await first, await second);
+    });
+
     group('mocking', () {
       const String _key = 'dummy';
       const String _prefixedKey = 'flutter.' + _key;
@@ -188,5 +196,14 @@ void main() {
 
       expect(preferences.getStringList('myList'), <String>[]);
     });
+  });
+
+  test('calling mock initial values with non-prefixed keys succeeds', () async {
+    SharedPreferences.setMockInitialValues(<String, String>{
+      'test': 'foo',
+    });
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String value = prefs.getString('test');
+    expect(value, 'foo');
   });
 }
