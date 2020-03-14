@@ -53,6 +53,7 @@ public class FlutterWebView implements PlatformView, MethodCallHandler {
     platformThreadHandler = new Handler(context.getMainLooper());
     // Allow local storage.
     webView.getSettings().setDomStorageEnabled(true);
+    webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
 
     // Allow CORS
     webView.getSettings().setAllowUniversalAccessFromFileURLs(true);
@@ -306,6 +307,8 @@ public class FlutterWebView implements PlatformView, MethodCallHandler {
           final boolean debuggingEnabled = (boolean) settings.get(key);
 
           webView.setWebContentsDebuggingEnabled(debuggingEnabled);
+          break;
+        case "gestureNavigationEnabled":
           break;
         case "userAgent":
           updateUserAgent((String) settings.get(key));
