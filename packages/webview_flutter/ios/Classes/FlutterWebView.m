@@ -439,6 +439,9 @@
 }
 
 - (bool)loadAssetFile:(NSString*)url {
+  NSURL *url1 = [NSURL fileURLWithPath:url];
+  [_webView loadFileURL:url1 allowingReadAccessToURL:[NSURL URLWithString:@"file:///"]];
+  return true;
   NSString* key = [_registrar lookupKeyForAsset:url];
   NSURL* nsUrl = [[NSBundle mainBundle] URLForResource:key withExtension:nil];
   if (!nsUrl) {
