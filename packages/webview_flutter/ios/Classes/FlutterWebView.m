@@ -113,6 +113,10 @@
         _webView.scrollView.automaticallyAdjustsScrollIndicatorInsets = NO;
       }
     }
+    // Disable webview scrolling
+    _webView.scrollView.scrollEnabled = NO;
+    _webView.scrollView.bounces = NO;
+    _webView.scrollView.panGestureRecognizer.enabled = NO;
 
     [self applySettings:settings];
     // TODO(amirh): return an error if apply settings failed once it's possible to do so.
